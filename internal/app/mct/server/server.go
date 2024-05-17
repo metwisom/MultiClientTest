@@ -17,12 +17,6 @@ func handleConnection(conn net.Conn) {
 			fmt.Println("Error reading:", err)
 			return
 		}
-
-		_, err = conn.Write([]byte{0})
-		if err != nil {
-			fmt.Println("Error writing:", err)
-			return
-		}
 	}
 }
 

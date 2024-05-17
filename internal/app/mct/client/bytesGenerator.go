@@ -1,9 +1,16 @@
 package client
 
+import (
+	"math/rand"
+	"time"
+)
+
 func bytesGenerator(kb int) []byte {
-	var list = []byte{}
-	for i := 0; i < 1024*kb; i++ {
-		list = append(list, 0)
+	rand.Seed(time.Now().UnixNano())
+
+	var list = make([]byte, 1024*kb)
+	for i := range list {
+		list[i] = byte(rand.Intn(256))
 	}
 	return list
 }

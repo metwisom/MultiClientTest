@@ -38,6 +38,8 @@ func getNextUnit(currentUnit string) string {
 		return "KB"
 	case "KB":
 		return "MB"
+	case "MB":
+		return "GB"
 	default:
 		return "B"
 	}

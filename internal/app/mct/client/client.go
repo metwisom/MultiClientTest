@@ -17,8 +17,8 @@ func clientRoutine(wg *sync.WaitGroup, id int, addr string) {
 	}
 	defer conn.Close()
 
-	message := bytesGenerator(1)
-	buffer := make([]byte, 1)
+	message := bytesGenerator(100)
+
 	for {
 		_, err := conn.Write(message)
 		if err != nil {
@@ -26,18 +26,13 @@ func clientRoutine(wg *sync.WaitGroup, id int, addr string) {
 			return
 		}
 
-		_, err = conn.Read(buffer)
-		if err != nil {
-			fmt.Printf("Client %d: Error reading response: %v\n", id, err)
-			return
-		}
-		Counter.Add(len(message))
+		Counter.Add(len(message) * 8)
 	}
 }
 
 func Run(addr string, count int) {
 	if count == 0 {
-		count = 50
+		count = 1
 	}
 	var wg sync.WaitGroup
 
